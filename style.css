@@ -837,6 +837,287 @@ h1, h2, h3, h4 {
   margin: 0;
 }
 
+/* ── 7.5. SIGNATURE FEATURE 2: 3D SANITÄR- & ARMATUREN-STUDIO ── */
+.section-3d-studio {
+  padding-top: clamp(4rem, 8vw, 7rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+  background: var(--color-canvas);
+  position: relative;
+  overflow: hidden;
+}
+
+.studio-3d-card {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  margin-top: var(--space-8);
+  align-items: stretch;
+}
+
+.studio-viewport-col {
+  position: relative;
+  background: radial-gradient(circle at center, #ffffff 0%, #f4f0e6 100%);
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#armatur3dCanvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  cursor: grab;
+  touch-action: none;
+}
+
+#armatur3dCanvas:active {
+  cursor: grabbing;
+}
+
+.viewport-overlay-badge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-accent-marine);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.viewport-hint {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(22, 23, 26, 0.8);
+  color: #ffffff;
+  backdrop-filter: blur(8px);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity 0.3s ease;
+}
+
+.studio-controls-col {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.control-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-accent-brass);
+}
+
+.control-title {
+  font-size: clamp(1.25rem, 2vw, 1.625rem);
+  color: var(--color-ink);
+  line-height: 1.2;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.control-desc {
+  font-size: 0.875rem;
+  color: var(--color-ink-muted);
+  line-height: 1.5;
+}
+
+.material-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mat-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.mat-btn:hover {
+  border-color: var(--color-accent-marine);
+  background: var(--color-canvas);
+}
+
+.mat-btn.active {
+  border-color: var(--color-accent-marine);
+  background: var(--color-accent-marine-light);
+  box-shadow: 0 2px 8px rgba(11, 79, 108, 0.12);
+}
+
+.swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+}
+
+.swatch-brass { background: linear-gradient(135deg, #d4af37 0%, #a67c1e 100%); }
+.swatch-black { background: linear-gradient(135deg, #2b2b2b 0%, #111111 100%); }
+.swatch-chrome { background: linear-gradient(135deg, #f0f4f8 0%, #9aa5b1 100%); }
+.swatch-rosegold { background: linear-gradient(135deg, #e8a598 0%, #b86d5e 100%); }
+
+.mat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-name {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.mat-sub {
+  font-size: 0.75rem;
+  color: var(--color-ink-subtle);
+}
+
+.water-interactive-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-canvas-sub);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--color-border);
+}
+
+.btn-water-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-accent-marine);
+  color: #ffffff;
+  border: none;
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-water-toggle:hover {
+  background: var(--color-accent-marine-hover);
+  transform: translateY(-1px);
+}
+
+.btn-water-toggle.active {
+  background: #0284c7;
+  box-shadow: 0 0 14px rgba(2, 132, 199, 0.45);
+}
+
+.water-hint {
+  font-size: 0.75rem;
+  color: var(--color-ink-subtle);
+}
+
+.quality-badges-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.q-badge {
+  background: var(--color-canvas);
+  border: 1px solid var(--color-border);
+  padding: 0.5rem;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.6875rem;
+}
+
+.q-badge strong {
+  color: var(--color-accent-marine);
+  font-size: 0.8125rem;
+}
+
+.studio-cta-row {
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 960px) {
+  .studio-3d-card {
+    grid-template-columns: 1fr;
+  }
+  .studio-viewport-col {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    min-height: 380px;
+  }
+  .canvas-wrapper {
+    min-height: 380px;
+  }
+}
+
 /* Configurator Box */
 .configurator-box {
   background: var(--color-surface);
